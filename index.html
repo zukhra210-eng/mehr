@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mehrimiz sizga</title>
+<meta name="description" content="Mehrimiz sizga - Women's Centre for Social and Legal Support, Andijan Region">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:#000}
+::-webkit-scrollbar-thumb{background:#1f2937;border-radius:3px}
+body{background:#000;color:#fff;overflow-x:hidden;margin:0;padding:0;font-family:"Space Grotesk",sans-serif}
+
+.scroll-container{position:relative;width:100%;height:500vh;background:#000}
+.fixed-viewport{position:fixed;inset:0;width:100%;height:100%;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#000}
+
+/* BRAND */
+.brand{position:absolute;top:clamp(20px,3vw,40px);left:clamp(20px,3vw,40px);z-index:45;display:flex;align-items:center;gap:clamp(8px,.8vw,14px);user-select:none;pointer-events:auto;will-change:transform,opacity,filter}
+.brand-logo{width:clamp(36px,3.5vw,56px);height:auto;border-radius:50%;background:#fff;padding:2px}
+.brand-text{font-family:"Instrument Serif",serif;font-size:clamp(18px,1.8vw,28px);font-weight:400;color:#fff;letter-spacing:-.02em}
+
+/* NAV */
+.top-nav{position:absolute;top:clamp(20px,3vw,40px);right:clamp(20px,3vw,40px);z-index:50;pointer-events:auto;will-change:transform,opacity,filter}
+.nav-desk{display:flex;gap:0;list-style:none;margin:0;padding:0;align-items:center}
+.nav-link{display:block;background:#fff;color:#111;font-family:"Manrope",sans-serif;font-size:clamp(11px,.8vw,14px);font-weight:500;text-decoration:none;padding:clamp(6px,.6vw,10px) clamp(12px,1vw,20px);border-radius:8px;transition:opacity .2s,transform .2s;white-space:nowrap;cursor:pointer}
+.nav-link:hover{opacity:.85;transform:scale(1.03)}
+.lang-sw{display:flex;gap:3px;margin-left:6px}
+.lbtn{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.2);padding:clamp(6px,.6vw,10px) clamp(8px,.7vw,14px);border-radius:8px;cursor:pointer;font-family:"Manrope",sans-serif;font-size:clamp(10px,.7vw,13px);font-weight:600;transition:all .2s}
+.lbtn.on{background:#E85D75;border-color:#E85D75;color:#fff}
+.lbtn:hover{opacity:.85}
+
+/* HAMBURGER */
+.hbtn{display:none}
+@media(max-width:768px){
+.nav-desk .nav-link{display:none}
+.hbtn{display:flex;flex-direction:column;gap:5px;width:44px;height:44px;background:rgba(255,255,255,.12);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.15);border-radius:10px;cursor:pointer;padding:0;align-items:center;justify-content:center;z-index:60}
+.hline{display:block;width:20px;height:1.5px;background:#fff;border-radius:2px;transition:transform .3s,opacity .2s}
+.hline.t-open{transform:translateY(6.5px) rotate(45deg)}
+.hline.m-open{opacity:0}
+.hline.b-open{transform:translateY(-6.5px) rotate(-45deg)}
+.mob-menu{position:fixed;inset:0;z-index:55;background:rgba(0,0,0,.9);backdrop-filter:blur(40px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.mob-menu.open{opacity:1;visibility:visible}
+.mob-link{font-family:"Instrument Serif",serif;font-size:36px;color:#fff;text-decoration:none;padding:8px 24px;transition:opacity .2s;cursor:pointer}
+.mob-link:hover{opacity:.6}
+}
+
+/* BOTANICAL CARD */
+.bot-card{position:absolute;bottom:clamp(20px,3vw,40px);left:clamp(20px,3vw,40px);width:clamp(340px,30vw,520px);max-width:90vw;background:rgba(255,255,255,.14);backdrop-filter:blur(80px);-webkit-backdrop-filter:blur(80px);padding:clamp(28px,3vw,48px);z-index:45;pointer-events:auto;border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px rgba(0,0,0,.3);will-change:transform,opacity,filter}
+@media(max-width:768px){.bot-card{bottom:24px;left:16px;padding:24px 20px;width:calc(100vw - 32px)}}
+.bot-title{font-family:"Instrument Serif",serif;font-size:clamp(28px,4.5vw,64px);line-height:1.08;font-weight:400;color:#fff;margin:0 0 clamp(8px,1vw,16px) 0;letter-spacing:-.01em;max-width:100%}
+.bot-title .it{font-style:italic}
+.bot-sub{font-family:"Manrope",sans-serif;font-size:clamp(11px,.9vw,14px);line-height:1.6;font-weight:400;color:rgba(255,255,255,.6);margin:0;max-width:100%}
+.cta-circle{position:absolute;right:calc(-1*(clamp(64px,6vw,96px)/2));bottom:clamp(16px,2vw,32px);width:clamp(64px,6vw,96px);height:clamp(64px,6vw,96px);border-radius:50%;background:#E85D75;color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .25s,background .2s;z-index:55}
+.cta-circle:hover{transform:scale(1.08);background:#f07090}
+.cta-circle svg{width:clamp(24px,2.4vw,36px);height:auto;stroke:#fff;stroke-width:1.75;fill:none}
+
+/* FEATURE CARDS */
+.feat-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:max-content;max-width:95%;display:grid;grid-template-columns:repeat(3,260px);gap:16px;z-index:46;pointer-events:none;align-items:stretch}
+.feat-card{background:rgba(255,255,255,.14);backdrop-filter:blur(80px);-webkit-backdrop-filter:blur(80px);border:1px solid rgba(255,255,255,.12);padding:24px;width:260px;height:400px;box-shadow:0 30px 60px rgba(0,0,0,.3);display:flex;flex-direction:column;justify-content:flex-start;will-change:transform,opacity,filter}
+.feat-card:hover{border-color:rgba(255,255,255,.4)}
+.feat-icon{margin-bottom:28px;color:#E85D75;display:flex;align-items:center;justify-content:center}
+.feat-icon svg{width:clamp(32px,3vw,44px);height:auto;opacity:.9}
+.feat-title{font-family:"Instrument Serif",serif;font-size:22px;font-weight:400;line-height:1.15;color:#fff;margin:auto 0 8px 0;letter-spacing:-.01em}
+.feat-desc{font-family:"Manrope",sans-serif;font-size:clamp(11px,.85vw,13px);line-height:1.55;font-weight:400;color:rgba(255,255,255,.6);margin:0}
+@media(max-width:768px){
+.feat-wrap{grid-template-columns:1fr;width:calc(100% - 32px);left:16px;transform:translate(0,-50%);gap:12px;max-height:80vh;overflow-y:auto}
+.feat-card{width:100%;height:auto;min-height:200px;padding:20px}
+}
+
+/* MISSION TEXT */
+.mis-wrap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:40;padding:0 24px}
+.mis-inner{position:relative;width:100%;max-width:56rem;height:100%;display:flex;align-items:center;justify-content:center}
+.mis-p{position:absolute;text-align:center;user-select:none;font-family:"Instrument Serif",serif;font-size:clamp(1.6rem,4vw,3.2rem);color:rgba(255,255,255,.92);line-height:1.35;letter-spacing:-.02em;will-change:transform,opacity,filter}
+.mis-pill{display:inline-block;padding:2px 16px;margin:0 6px;background:#0A6E6E;color:#fff;border-radius:9999px;vertical-align:middle;font-family:"Instrument Serif",serif}
+@media(min-width:768px){.mis-pill{padding:4px 20px;margin:0 10px}}
+
+/* CONTACT */
+.ct-wrap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:50;padding:0 24px}
+.ct-card{position:relative;width:100%;max-width:28rem;background:rgba(0,0,0,.5);backdrop-filter:blur(48px);-webkit-backdrop-filter:blur(48px);border:1px solid rgba(255,255,255,.1);padding:32px;text-align:center;pointer-events:auto;display:flex;flex-direction:column;align-items:center;will-change:transform,opacity,filter}
+@media(min-width:768px){.ct-card{padding:40px}}
+.ct-logo{width:64px;height:64px;border-radius:50%;background:#fff;padding:4px;margin-bottom:16px;object-fit:contain}
+.ct-title{font-family:"Instrument Serif",serif;font-size:clamp(1.3rem,2vw,1.8rem);color:#fff;font-weight:400;letter-spacing:-.02em;margin:0 0 6px 0}
+.ct-sub{font-family:"Space Grotesk",sans-serif;font-size:clamp(10px,.8vw,12px);color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.05em;margin:0 0 24px 0;line-height:1.6;max-width:20rem}
+.ct-info{width:100%;display:flex;flex-direction:column;gap:12px;margin-bottom:20px}
+.ct-row{display:flex;align-items:center;gap:10px;font-family:"Space Grotesk",sans-serif;font-size:clamp(12px,.9vw,14px);color:rgba(255,255,255,.8)}
+.ct-row a{color:#E85D75;text-decoration:none;transition:opacity .2s}
+.ct-row a:hover{opacity:.7}
+.ct-row-icon{width:16px;text-align:center;opacity:.5}
+.ct-btn{display:block;width:100%;padding:14px 24px;background:#E85D75;color:#fff;border:none;border-radius:0;cursor:pointer;font-family:"Space Grotesk",sans-serif;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;transition:background .3s;text-decoration:none;text-align:center}
+.ct-btn:hover{background:#f07090}
+
+/* VIDEO BG */
+.bg-wrap{position:absolute;top:-5%;left:-5%;right:-5%;bottom:-5%;width:110%;height:110%;pointer-events:none;user-select:none;transform:translate3d(0,0,0);transition:transform .4s cubic-bezier(.15,.85,.35,1)}
+.bg-wrap video{position:absolute;width:0;height:0;opacity:0}
+.bg-wrap canvas{width:100%;height:100%;display:block}
+
+/* LOADING */
+.ld-screen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#000;z-index:60;transition:opacity 1s ease;text-align:center}
+.ld-screen.hidden{opacity:0;pointer-events:none}
+.ld-logo{width:80px;height:80px;border-radius:50%;background:#fff;padding:6px;margin-bottom:16px;animation:spin 3s linear infinite;object-fit:contain}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ld-text{font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:.1em;color:#6b7280;text-transform:uppercase;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* ERROR */
+.err-screen{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#000;z-index:55;display:none}
+.err-screen.show{display:flex}
+.err-card{padding:16px;border:1px solid #1f2937;border-radius:4px;background:#09090b;max-width:24rem;text-align:center}
+.err-card p{color:#9ca3af;font-family:"JetBrains Mono",monospace;font-size:12px;line-height:1.6;margin:0}
+</style>
+</head>
+<body>
+
+<div class="scroll-container" id="sc">
+<div class="fixed-viewport">
+
+<!-- Brand -->
+<div class="brand" id="elBrand">
+<img src="images/logo.jpg" alt="Logo" class="brand-logo">
+<span class="brand-text" data-t="brand">Mehrimiz sizga</span>
+</div>
+
+<!-- Nav -->
+<header class="top-nav" id="elNav">
+<nav>
+<ul class="nav-desk">
+<li><a class="nav-link" data-t="n_about" onclick="scrollTo25()">Марказ хакида</a></li>
+<li><a class="nav-link" data-t="n_srv" onclick="scrollTo50()">Хизматлар</a></li>
+<li><a class="nav-link" data-t="n_contact" onclick="scrollTo100()">Алока</a></li>
+<li class="lang-sw">
+<button class="lbtn on" onclick="setL('uz')">UZ</button>
+<button class="lbtn" onclick="setL('ru')">RU</button>
+<button class="lbtn" onclick="setL('en')">EN</button>
+</li>
+</ul>
+<button class="hbtn" id="hBtn" aria-label="Menu">
+<span class="hline" id="hl1"></span>
+<span class="hline" id="hl2"></span>
+<span class="hline" id="hl3"></span>
+</button>
+</nav>
+</header>
+
+<!-- Mobile menu -->
+<div class="mob-menu" id="mobMenu">
+<a class="mob-link" data-t="n_about" onclick="scrollTo25();closeMob()">Марказ хакида</a>
+<a class="mob-link" data-t="n_srv" onclick="scrollTo50();closeMob()">Хизматлар</a>
+<a class="mob-link" data-t="n_contact" onclick="scrollTo100();closeMob()">Алока</a>
+</div>
+
+<!-- Botanical card -->
+<div class="bot-card" id="elCard">
+<h2 class="bot-title" data-t="card_t"><span class="it">Мехримиз</span> сизга аёллар ва уларнинг оилаларини ижтимоий хукукий <span class="it">куллаб-кувватлаш</span> маркази</h2>
+<p class="bot-sub" data-t="card_s">Кийин ахволга тушиб колган, ижтимоий химояга мухтож фукароларга зарур хизматларни курсатилишини ташкил этамиз, мурожаат этганларга керакли мутахассислар хизматини курсатилишида кумаклашамиз.</p>
+<button class="cta-circle" id="ctaBtn" aria-label="Scroll">
+<svg viewBox="0 0 40 24"><path stroke-linecap="round" stroke-linejoin="round" d="M29.5 4.5L37 12m0 0l-7.5 7.5M37 12H3"/></svg>
+</button>
+</div>
+
+<!-- Feature cards -->
+<div class="feat-wrap" id="elFeat" style="visibility:hidden">
+<div class="feat-card" id="fc1" style="opacity:0">
+<div class="feat-icon">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m9-9H3"/><circle cx="12" cy="12" r="9"/></svg>
+</div>
+<h3 class="feat-title" data-t="f1t">Юридик ёрдам хизматлари курсатилишини ташкил этиш</h3>
+<p class="feat-desc" data-t="f1d">Мурожаат килганларнинг хукукларини химоя килиш учун тегишли ташкилотларга йуналтириш, хужжатларни расмийлаштириш учун муассасаларга олиб бориш, судларга мурожаат учун аризалар ёзишда кумаклашиш.</p>
+</div>
+<div class="feat-card" id="fc2" style="opacity:0">
+<div class="feat-icon">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16 3L7 12h12l-6 9"/></svg>
+</div>
+<h3 class="feat-title" data-t="f2t">Аноним психологик ёрдамлар курсатишни ташкил этиш</h3>
+<p class="feat-desc" data-t="f2d">Зуравонлик ва стресс холатига тушиб колган аёллар ва уларнинг оила аъзоларига психологик ёрдам курсатилишини ташкил этиш. Рухий саломатликни тиклашга каратилган махсус терапия машгулотлари.</p>
+</div>
+<div class="feat-card" id="fc3" style="opacity:0">
+<div class="feat-icon">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m9-9H3m14.5-4.5l-11 11m11 0l-11-11"/></svg>
+</div>
+<h3 class="feat-title" data-t="f3t">Тиббий хизматлар курсатилишини таъминлаш</h3>
+<p class="feat-desc" data-t="f3d">Ижтимоий ходим томонидан марказга мурожаат этган зуравонликдан жабрланган аёлларни тиббий муассасаларига олиб бориш, курикларда кумаклашиш, бепул тиббий хизматлар курсатилишини таъминлаш.</p>
+</div>
+</div>
+
+<!-- Mission text -->
+<div class="mis-wrap" id="elMis" style="visibility:hidden">
+<div class="mis-inner">
+<div class="mis-p" id="mp1" style="opacity:0" data-t="m1">Хотин-кизлар ва уларнинг оила аъзоларини ижтимоий-хукукий <span class="mis-pill">куллаб-кувватлаш,</span> кийин ахволга тушиб колган фукароларга зарур хизматларни курсатилишини ташкил этиш.</div>
+<div class="mis-p" id="mp2" style="opacity:0" data-t="m2">Ахоли, айникса ёшлар уртасида норасмий миграция ва одам савдосини олдини олиш, жабрланганларга психологик, тиббий, хукукий ва ижтимоий ёрдам турларини олиш <span class="mis-pill">имконини</span> яратиш.</div>
+<div class="mis-p" id="mp3" style="opacity:0" data-t="m3">Хотин-кизлар ва ёшларнинг имкониятларини кенгайтириш, жамиятда хотин-кизларнинг ижтимоий-сиёсий фаоллигини ошириш оркали мамлакатда фукаролик <span class="mis-pill">жамиятини</span> курилишига кумаклашиш.</div>
+</div>
+</div>
+
+<!-- Contact -->
+<div class="ct-wrap" id="elCt" style="visibility:hidden">
+<div class="ct-card" id="ctCard" style="opacity:0">
+<img src="images/logo.jpg" alt="Logo" class="ct-logo">
+<h3 class="ct-title" data-t="ct_t">Биз билан богланинг</h3>
+<p class="ct-sub" data-t="ct_s">Долзарб алока Ишонч телефони хизмати ташкил этилган. Мурожаат этганларга керакли мутахассислар хизматини курсатилишида кумаклашилади.</p>
+<div class="ct-info">
+<div class="ct-row"><span class="ct-row-icon">&#9742;</span> <a href="tel:+998374228-61-39">(374) 228-61-39</a></div>
+<div class="ct-row"><span class="ct-row-icon">&#9993;</span> <a href="mailto:halida05@gmail.com">halida05@gmail.com</a></div>
+<div class="ct-row"><span class="ct-row-icon">&#9992;</span> <a href="https://t.me/mehrimiz_sizga" target="_blank">t.me/mehrimiz_sizga</a></div>
+<div class="ct-row"><span class="ct-row-icon">&#128205;</span> <span data-t="ct_addr">Андижон шахри, Мукимий кучаси, 14</span></div>
+</div>
+<a href="tel:+998374228-61-39" class="ct-btn" data-t="ct_btn">МУРОЖААТ ЭТИШ</a>
+</div>
+</div>
+
+<!-- Video BG -->
+<div class="bg-wrap" id="bgW">
+<video id="v1" src="https://pub-86dc5b5484314368ac5436a674b0d919.r2.dev/cloudinarry%20to%20cloudflare/202606101700_hglz7q.mp4" preload="auto" muted playsinline></video>
+<video id="v2" src="https://pub-86dc5b5484314368ac5436a674b0d919.r2.dev/cloudinarry%20to%20cloudflare/202606101702_sd50y0.mp4" preload="auto" muted playsinline></video>
+<video id="v3" src="https://pub-86dc5b5484314368ac5436a674b0d919.r2.dev/cloudinarry%20to%20cloudflare/202606101703_jmidj2.mp4" preload="auto" muted playsinline></video>
+<canvas id="cv"></canvas>
+</div>
+
+<!-- Loading -->
+<div class="ld-screen" id="ldScreen">
+<img src="images/logo.jpg" alt="Loading" class="ld-logo">
+<p class="ld-text">Mehrimiz sizga</p>
+</div>
+
+<!-- Error -->
+<div class="err-screen" id="errScreen">
+<div class="err-card"><p>Video yuklashda xatolik. Sahifani qayta yuklang.</p></div>
+</div>
+
+</div>
+</div>
+
+<script>
+(function(){
+var sc=document.getElementById("sc");
+var vids={v1:document.getElementById("v1"),v2:document.getElementById("v2"),v3:document.getElementById("v3")};
+var cv=document.getElementById("cv");
+var bgW=document.getElementById("bgW");
+var elBrand=document.getElementById("elBrand");
+var elNav=document.getElementById("elNav");
+var elCard=document.getElementById("elCard");
+var elFeat=document.getElementById("elFeat");
+var fc1=document.getElementById("fc1");
+var fc2=document.getElementById("fc2");
+var fc3=document.getElementById("fc3");
+var elMis=document.getElementById("elMis");
+var mp1=document.getElementById("mp1");
+var mp2=document.getElementById("mp2");
+var mp3=document.getElementById("mp3");
+var elCt=document.getElementById("elCt");
+var ctCard=document.getElementById("ctCard");
+var ldScreen=document.getElementById("ldScreen");
+var errScreen=document.getElementById("errScreen");
+
+var tgt=0,cur=0;
+var dur={v1:0,v2:0,v3:0};
+var metaOk={v1:false,v2:false,v3:false};
+var seeking={v1:false,v2:false,v3:false};
+var pendSeek={v1:-1,v2:-1,v3:-1};
+var offCv=null;
+
+function activeKey(p){return p<=.333?"v1":p<=.666?"v2":"v3";}
+
+function drawFrame(){
+var p=cur;
+var k=activeKey(p);
+var vid=vids[k];
+if(!vid||vid.readyState<2)return;
+var dpr=window.devicePixelRatio||1;
+var cW=cv.width/dpr,cH=cv.height/dpr;
+if(cW===0||cH===0)return;
+var vW=vid.videoWidth||1920,vH=vid.videoHeight||1080;
+var vA=vW/vH,cA=cW/cH;
+var dW=cW,dH=cH,oX=0,oY=0;
+if(vA>cA){dW=cH*vA;oX=(cW-dW)/2;}
+else{dH=cW/vA;oY=(cH-dH)/2;}
+if(!offCv)offCv=document.createElement("canvas");
+if(offCv.width!==cv.width||offCv.height!==cv.height){offCv.width=cv.width;offCv.height=cv.height;}
+var oc=offCv.getContext("2d");
+if(!oc)return;
+try{
+oc.setTransform(dpr,0,0,dpr,0,0);
+oc.clearRect(0,0,cW,cH);
+oc.drawImage(vid,oX,oY,dW,dH);
+var ctx=cv.getContext("2d");
+if(!ctx)return;
+ctx.setTransform(1,0,0,1,0,0);
+ctx.drawImage(offCv,0,0);
+}catch(e){}
+}
+
+function handleResize(){
+var par=cv.parentElement;
+if(!par)return;
+var dpr=window.devicePixelRatio||1;
+var w=par.clientWidth,h=par.clientHeight;
+cv.width=w*dpr;cv.height=h*dpr;
+cv.style.width=w+"px";cv.style.height=h+"px";
+if(offCv){offCv.width=cv.width;offCv.height=cv.height;}
+drawFrame();
+}
+
+function safeSeek(k,t){
+var vid=vids[k];
+if(!vid)return;
+var d=dur[k]||vid.duration||10;
+var c=Math.max(0,Math.min(t,d-.05));
+if(Math.abs(vid.currentTime-c)<.01)return;
+if(seeking[k]){pendSeek[k]=c;return;}
+seeking[k]=true;pendSeek[k]=-1;
+vid.currentTime=c;
+}
+
+["v1","v2","v3"].forEach(function(k){
+vids[k].addEventListener("seeked",function(){
+seeking[k]=false;
+if(k===activeKey(cur))drawFrame();
+if(pendSeek[k]>=0){var t=pendSeek[k];pendSeek[k]=-1;safeSeek(k,t);}
+});
+});
+
+function checkReady(){
+if(metaOk.v1&&metaOk.v2&&metaOk.v3){
+setTimeout(function(){ldScreen.classList.add("hidden");handleResize();},100);
+}
+}
+["v1","v2","v3"].forEach(function(k){
+var el=vids[k];
+function onM(){
+var d=el.duration;
+if(d&&!isNaN(d)&&d>0&&d!==Infinity){dur[k]=d;metaOk[k]=true;checkReady();}
+}
+el.addEventListener("loadedmetadata",onM);
+el.addEventListener("durationchange",onM);
+el.addEventListener("canplay",onM);
+el.addEventListener("error",function(){errScreen.classList.add("show");});
+if(el.readyState>=1)onM();
+});
+setTimeout(function(){
+["v1","v2","v3"].forEach(function(k){
+if(!metaOk[k]){dur[k]=vids[k].duration||10;metaOk[k]=true;}
+});
+checkReady();
+},8000);
+
+window.addEventListener("resize",handleResize);
+
+window.addEventListener("mousemove",function(e){
+var x=(e.clientX-window.innerWidth/2)/(window.innerWidth/2);
+var y=(e.clientY-window.innerHeight/2)/(window.innerHeight/2);
+bgW.style.transform="translate3d("+(x*-20)+"px,"+(y*-20)+"px,0)";
+});
+
+window.addEventListener("scroll",function(){
+var st=window.pageYOffset||document.documentElement.scrollTop;
+var mx=sc.scrollHeight-window.innerHeight;
+tgt=mx>0?Math.max(0,Math.min(1,st/mx)):0;
+},{passive:true});
+
+function setVis(el,v){if(!el)return;el.style.visibility=v?"visible":"hidden";el.style.pointerEvents=v?"auto":"none";}
+function setS(el,o,tx,ty,bl){if(!el)return;el.style.opacity=o;el.style.transform="translate3d("+tx+"px,"+ty+"px,0)";el.style.filter="blur("+bl+"px)";}
+
+function tick(){
+cur+=(tgt-cur)*.08;
+var p=cur;
+var ak=activeKey(p);
+var pl=ak==="v1"?Math.max(0,Math.min(1,p*3)):ak==="v2"?Math.max(0,Math.min(1,(p-.333)*3)):Math.max(0,Math.min(1,(p-.666)*3));
+safeSeek(ak,pl*(dur[ak]||10));
+
+var f=Math.min(1,Math.max(0,p/.15));
+setS(elCard,1-f,f*-35,f*35,f*16);
+elCard.style.pointerEvents=f>.95?"none":"auto";
+
+f=Math.min(1,Math.max(0,(p-.03)/.15));
+setS(elNav,1-f,0,f*-35,f*14);
+elNav.style.pointerEvents=f>.95?"none":"auto";
+
+f=Math.min(1,Math.max(0,(p-.06)/.15));
+setS(elBrand,1-f,f*-25,f*-35,f*12);
+elBrand.style.pointerEvents=f>.95?"none":"auto";
+
+var show=p>.13&&p<.55;
+setVis(elFeat,show);
+function animC(el,eS,eD,xS,xD,tx,ty){
+if(!el)return;
+var op=0,bl=16,x=tx,y=ty;
+if(p>=eS&&p<=.333){var r=Math.min(1,Math.max(0,(p-eS)/eD));op=r;bl=(1-r)*16;x=(1-r)*tx;y=(1-r)*ty;}
+else if(p>.333&&p<=xS+xD){var r=Math.min(1,Math.max(0,(p-xS)/xD));op=1-r;bl=r*16;x=r*tx;y=r*ty;}
+setS(el,op,x,y,bl);
+}
+animC(fc1,.15,.15,.333,.12,-35,35);
+animC(fc2,.18,.13,.333,.15,0,35);
+animC(fc3,.21,.11,.333,.18,35,35);
+
+setVis(elMis,p>.44);
+function animP(el,iS,iE,hE,oE){
+if(!el)return;
+var op=0,bl=20,y=120;
+if(p>=iS&&p<iE){var r=(p-iS)/(iE-iS);op=r;bl=(1-r)*20;y=(1-r)*120;}
+else if(p>=iE&&p<=hE){op=1;bl=0;y=0;}
+else if(p>hE&&p<=oE){var r=(p-hE)/(oE-hE);op=1-r;bl=r*20;y=r*-120;}
+else if(p>oE){op=0;bl=20;y=-120;}
+setS(el,op,0,y,bl);
+}
+animP(mp1,.44,.47,.59,.62);
+animP(mp2,.62,.65,.77,.80);
+animP(mp3,.80,.83,.90,.93);
+
+setVis(elCt,p>.88);
+if(p>.88){
+var opF=0,blF=20,yF=120;
+if(p>=.90&&p<.95){var r=(p-.90)/.05;opF=r;blF=(1-r)*20;yF=(1-r)*120;}
+else if(p>=.95){opF=1;blF=0;yF=0;}
+setS(ctCard,opF,0,yF,blF);
+}
+
+requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+
+// Hamburger
+var mobOpen=false;
+document.getElementById("hBtn").addEventListener("click",function(){
+mobOpen=!mobOpen;
+document.getElementById("mobMenu").classList.toggle("open",mobOpen);
+document.getElementById("hl1").classList.toggle("t-open",mobOpen);
+document.getElementById("hl2").classList.toggle("m-open",mobOpen);
+document.getElementById("hl3").classList.toggle("b-open",mobOpen);
+});
+window.closeMob=function(){
+mobOpen=false;
+document.getElementById("mobMenu").classList.remove("open");
+document.getElementById("hl1").classList.remove("t-open");
+document.getElementById("hl2").classList.remove("m-open");
+document.getElementById("hl3").classList.remove("b-open");
+};
+
+// CTA + nav scroll
+document.getElementById("ctaBtn").addEventListener("click",function(){
+window.scrollTo({top:window.innerHeight*.9,behavior:"smooth"});
+});
+window.scrollTo25=function(){var mx=sc.scrollHeight-window.innerHeight;window.scrollTo({top:mx*.25,behavior:"smooth"});};
+window.scrollTo50=function(){var mx=sc.scrollHeight-window.innerHeight;window.scrollTo({top:mx*.5,behavior:"smooth"});};
+window.scrollTo100=function(){var mx=sc.scrollHeight-window.innerHeight;window.scrollTo({top:mx*.95,behavior:"smooth"});};
+
+// i18n
+var TR={
+ru:{
+brand:"Mehrimiz sizga",n_about:"О центре",n_srv:"Услуги",n_contact:"Контакты",
+card_t:"Центр <span class='it'>социально-правовой</span> поддержки женщин и их семей <span class='it'>Мехримиз сизга</span> Андижанской области",
+card_s:"Организуем предоставление необходимых услуг гражданам, попавшим в трудную жизненную ситуацию и нуждающимся в социальной защите, содействуем обратившимся в получении помощи нужных специалистов.",
+f1t:"Организация предоставления юридической помощи",f1d:"Направление обратившихся в соответствующие учреждения для защиты прав, сопровождение для оформления документов, содействие в написании заявлений в суд, сопровождение в судебные и правоохранительные органы.",
+f2t:"Организация предоставления анонимной психологической помощи",f2d:"Организация психологической помощи женщинам и членам их семей, подвергшимся насилию и стрессу. Специальные терапевтические занятия по восстановлению психического здоровья.",
+f3t:"Обеспечение предоставления медицинских услуг",f3d:"Сопровождение социальным работником пострадавших от насилия женщин в медицинские учреждения, содействие в прохождении осмотров, обеспечение бесплатных медуслуг при заболеваниях.",
+m1:"Социально-правовая <span class='mis-pill'>поддержка</span> женщин и членов их семей, организация предоставления необходимых услуг гражданам, нуждающимся в социальной защите.",
+m2:"Профилактика последствий нелегальной миграции и торговли людьми, создание <span class='mis-pill'>возможностей</span> для получения пострадавшими первичной психологической, медицинской, юридической и социальной помощи.",
+m3:"Расширение возможностей женщин и молодежи, содействие построению гражданского <span class='mis-pill'>общества</span> через повышение общественно-политической активности женщин.",
+ct_t:"Свяжитесь с нами",ct_s:"Организован телефон доверия Долзарб алока. Содействуем обратившимся в получении помощи нужных специалистов.",ct_addr:"г. Андижан, ул. Мукимий, 14",ct_btn:"СВЯЗАТЬСЯ"
+},
+en:{
+brand:"Mehrimiz sizga",n_about:"About",n_srv:"Services",n_contact:"Contact",
+card_t:"<span class='it'>Mehrimiz sizga</span> Women's Centre for Social and Legal Support of Women and Their Families, <span class='it'>Andijan Region</span>",
+card_s:"We organise the delivery of essential services to citizens in difficult life situations who are in need of social protection, and assist callers in accessing the services of relevant specialists.",
+f1t:"Organising the delivery of legal assistance",f1d:"Referral to relevant institutions for rights protection, accompanying for document processing, assistance in drafting court applications, accompanying to courts and law enforcement bodies.",
+f2t:"Organising anonymous psychological assistance",f2d:"Organising psychological help for women and family members affected by violence and stress. Specialised therapeutic sessions for mental health recovery.",
+f3t:"Ensuring the delivery of medical services",f3d:"Social workers accompany women affected by violence to medical institutions, assist with examinations, and ensure access to free medical services when illnesses are identified.",
+m1:"Social and legal <span class='mis-pill'>support</span> for women and their family members, organising the delivery of essential services to citizens in need of social protection.",
+m2:"Preventing the consequences of irregular migration and human trafficking, creating <span class='mis-pill'>opportunities</span> for victims to receive initial psychological, medical, legal and social assistance.",
+m3:"Expanding opportunities for women and youth, contributing to building civil <span class='mis-pill'>society</span> by increasing women's social and political participation.",
+ct_t:"Get in Touch",ct_s:"The Dolzarb Aloqa Trust Phone service has been established. We assist callers in accessing the services of relevant specialists.",ct_addr:"Andijan city, Mukimiy street, 14",ct_btn:"CONTACT US"
+}
+};
+window.setL=function(lang){
+try{
+document.querySelectorAll(".lbtn").forEach(function(b){b.classList.toggle("on",b.textContent.trim().toLowerCase()===lang);});
+if(lang==="uz"){
+document.querySelectorAll("[data-t]").forEach(function(el){var o=el.getAttribute("data-o");if(o)el.innerHTML=o;});
+document.documentElement.lang="uz";return;
+}
+var t=TR[lang];if(!t)return;
+document.querySelectorAll("[data-t]").forEach(function(el){
+var k=el.getAttribute("data-t");
+if(!el.getAttribute("data-o"))el.setAttribute("data-o",el.innerHTML);
+if(t[k])el.innerHTML=t[k];
+});
+document.documentElement.lang=lang;
+}catch(e){}
+};
+})();
+</script>
+</body>
+</html>
