@@ -58,7 +58,7 @@ body{background:#000;color:#fff;overflow-x:hidden;margin:0;padding:0;font-family
 .cta-circle svg{width:clamp(24px,2.4vw,36px);height:auto;stroke:#fff;stroke-width:1.75;fill:none}
 
 /* FEATURE CARDS */
-.feat-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:max-content;max-width:95%;display:grid;grid-template-columns:repeat(3,260px);gap:16px;z-index:46;pointer-events:none;align-items:stretch}
+.feat-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:max-content;max-width:95%;display:grid;grid-template-columns:repeat(2,260px);gap:16px;z-index:46;pointer-events:none;align-items:stretch}
 .feat-card{background:rgba(255,255,255,.14);backdrop-filter:blur(80px);-webkit-backdrop-filter:blur(80px);border:1px solid rgba(255,255,255,.12);padding:24px;width:260px;height:400px;box-shadow:0 30px 60px rgba(0,0,0,.3);display:flex;flex-direction:column;justify-content:flex-start;will-change:transform,opacity,filter}
 .feat-card:hover{border-color:rgba(255,255,255,.4)}
 .feat-icon{margin-bottom:28px;color:#E85D75;display:flex;align-items:center;justify-content:center}
@@ -69,6 +69,7 @@ body{background:#000;color:#fff;overflow-x:hidden;margin:0;padding:0;font-family
 .feat-wrap{grid-template-columns:1fr;width:calc(100% - 32px);left:16px;transform:translate(0,-50%);gap:12px;max-height:80vh;overflow-y:auto}
 .feat-card{width:100%;height:auto;min-height:200px;padding:20px}
 }
+body.play-mode .feat-card{transition:opacity .45s ease,filter .45s ease,transform .45s ease}
 
 /* MISSION TEXT */
 .mis-wrap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:40;padding:0 24px}
@@ -243,6 +244,13 @@ body.videos-failed .fixed-viewport{background:radial-gradient(130% 130% at 26% 1
 <h3 class="feat-title" data-t="f3t">Тиббий хизматлар курсатилишини таъминлаш</h3>
 <p class="feat-desc" data-t="f3d">Ижтимоий ходим томонидан марказга мурожаат этган зуравонликдан жабрланган аёлларни тиббий муассасаларига олиб бориш, курикларда кумаклашиш, бепул тиббий хизматлар курсатилишини таъминлаш.</p>
 </div>
+<div class="feat-card" id="fc4" style="opacity:0">
+<div class="feat-icon">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1m-1 4h1m4-4h1m-1 4h1M9 21v-4h6v4"/></svg>
+</div>
+<h3 class="feat-title" data-t="f4t">Ижтимоий ёрдам ва бандликка кўмаклашиш</h3>
+<p class="feat-desc" data-t="f4d">Ёшлар ва аёллар бандлигини таъминлашга кўмаклашиш мақсадида тадбиркорлик асослари бўйича маълумот берувчи мастер класслар, бизнес тренинглар ва семинарлар ташкил этилади. Бандликка мухтож фуқароларга тегишли ташкилотларга йўналтириш орқали амалий ёрдам кўрсатилади.</p>
+</div>
 </div>
 
 <!-- Mission text -->
@@ -375,6 +383,7 @@ var elFeat=document.getElementById("elFeat");
 var fc1=document.getElementById("fc1");
 var fc2=document.getElementById("fc2");
 var fc3=document.getElementById("fc3");
+var fc4=document.getElementById("fc4");
 var elMis=document.getElementById("elMis");
 var mp1=document.getElementById("mp1");
 var mp2=document.getElementById("mp2");
@@ -559,6 +568,13 @@ elBrand.style.pointerEvents=f>.95?"none":"auto";
 
 var show=p>.13&&p<.55;
 setVis(elFeat,show);
+if(playMode){
+var vis=show;
+setS(fc1,vis?1:0,0,0,vis?0:14);
+setS(fc2,vis?1:0,0,0,vis?0:14);
+setS(fc3,vis?1:0,0,0,vis?0:14);
+setS(fc4,vis?1:0,0,0,vis?0:14);
+}else{
 function animC(el,eS,eD,xS,xD,tx,ty){
 if(!el)return;
 var op=0,bl=16,x=tx,y=ty;
@@ -566,9 +582,11 @@ if(p>=eS&&p<=.333){var r=Math.min(1,Math.max(0,(p-eS)/eD));op=r;bl=(1-r)*16;x=(1
 else if(p>.333&&p<=xS+xD){var r=Math.min(1,Math.max(0,(p-xS)/xD));op=1-r;bl=r*16;x=r*tx;y=r*ty;}
 setS(el,op,x,y,bl);
 }
-animC(fc1,.15,.15,.333,.12,-35,35);
-animC(fc2,.18,.13,.333,.15,0,35);
-animC(fc3,.21,.11,.333,.18,35,35);
+animC(fc1,.15,.12,.333,.10,-35,-25);
+animC(fc2,.17,.11,.333,.11,35,-25);
+animC(fc3,.19,.11,.333,.13,-35,25);
+animC(fc4,.21,.10,.333,.15,35,25);
+}
 
 setVis(elMis,p>.44);
 function animP(el,iS,iE,hE,oE){
@@ -634,6 +652,7 @@ card_s:"Организуем предоставление необходимых
 f1t:"Организация предоставления юридической помощи",f1d:"Направление обратившихся в соответствующие учреждения для защиты прав, сопровождение для оформления документов, содействие в написании заявлений в суд, сопровождение в судебные и правоохранительные органы.",
 f2t:"Организация предоставления анонимной психологической помощи",f2d:"Организация психологической помощи женщинам и членам их семей, подвергшимся насилию и стрессу. Специальные терапевтические занятия по восстановлению психического здоровья.",
 f3t:"Обеспечение предоставления медицинских услуг",f3d:"Сопровождение социальным работником пострадавших от насилия женщин в медицинские учреждения, содействие в прохождении осмотров, обеспечение бесплатных медуслуг при заболеваниях.",
+f4t:"Содействие занятости и социальная поддержка",f4d:"В целях содействия занятости женщин и молодёжи организуются мастер-классы, бизнес-тренинги и семинары по основам предпринимательства. Нуждающимся в трудоустройстве оказывается практическая помощь путём направления в соответствующие организации.",
 m1:"Социально-правовая <span class='mis-pill'>поддержка</span> женщин и членов их семей, организация предоставления необходимых услуг гражданам, нуждающимся в социальной защите.",
 m2:"Профилактика последствий нелегальной миграции и торговли людьми, создание <span class='mis-pill'>возможностей</span> для получения пострадавшими первичной психологической, медицинской, юридической и социальной помощи.",
 m3:"Расширение возможностей женщин и молодежи, содействие построению гражданского <span class='mis-pill'>общества</span> через повышение общественно-политической активности женщин.",
@@ -647,6 +666,7 @@ card_s:"We organise the delivery of essential services to citizens in difficult 
 f1t:"Organising the delivery of legal assistance",f1d:"Referral to relevant institutions for rights protection, accompanying for document processing, assistance in drafting court applications, accompanying to courts and law enforcement bodies.",
 f2t:"Organising anonymous psychological assistance",f2d:"Organising psychological help for women and family members affected by violence and stress. Specialised therapeutic sessions for mental health recovery.",
 f3t:"Ensuring the delivery of medical services",f3d:"Social workers accompany women affected by violence to medical institutions, assist with examinations, and ensure access to free medical services when illnesses are identified.",
+f4t:"Employment assistance and social support",f4d:"To support the employment of women and youth, the centre organises master classes, business trainings and seminars on the basics of entrepreneurship. Practical assistance is provided to those seeking work by referring them to relevant organisations.",
 m1:"Social and legal <span class='mis-pill'>support</span> for women and their family members, organising the delivery of essential services to citizens in need of social protection.",
 m2:"Preventing the consequences of irregular migration and human trafficking, creating <span class='mis-pill'>opportunities</span> for victims to receive initial psychological, medical, legal and social assistance.",
 m3:"Expanding opportunities for women and youth, contributing to building civil <span class='mis-pill'>society</span> by increasing women's social and political participation.",
