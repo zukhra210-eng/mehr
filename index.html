@@ -48,23 +48,24 @@ body{background:#000;color:#fff;overflow-x:hidden;margin:0;padding:0;font-family
 }
 
 /* BOTANICAL CARD */
-.bot-card{position:absolute;bottom:clamp(20px,3vw,40px);left:clamp(20px,3vw,40px);width:clamp(340px,30vw,520px);max-width:90vw;background:rgba(255,255,255,.14);backdrop-filter:blur(80px);-webkit-backdrop-filter:blur(80px);padding:clamp(28px,3vw,48px);z-index:45;pointer-events:auto;border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px rgba(0,0,0,.3);will-change:transform,opacity,filter}
+.bot-card{position:absolute;bottom:clamp(16px,2.4vh,40px);left:clamp(20px,3vw,40px);width:clamp(340px,30vw,520px);max-width:90vw;background:rgba(255,255,255,.14);backdrop-filter:blur(80px);-webkit-backdrop-filter:blur(80px);padding:clamp(16px,2.4vh,48px);z-index:45;pointer-events:auto;border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px rgba(0,0,0,.3);will-change:transform,opacity,filter}
 @media(max-width:768px){.bot-card{bottom:24px;left:16px;padding:24px 20px;width:calc(100vw - 32px)}}
-.bot-title{font-family:"Instrument Serif",serif;font-size:clamp(28px,4.5vw,64px);line-height:1.08;font-weight:400;color:#fff;margin:0 0 clamp(8px,1vw,16px) 0;letter-spacing:-.01em;max-width:100%}
+.bot-text{max-height:min(70vh,520px);overflow-y:auto;overflow-x:hidden}
+.bot-title{font-family:"Instrument Serif",serif;font-size:clamp(20px,4.2vh,48px);line-height:1.12;font-weight:400;color:#fff;margin:0 0 clamp(6px,1vh,16px) 0;letter-spacing:-.01em;max-width:100%}
 .bot-title .it{font-style:italic}
-.bot-sub{font-family:"Manrope",sans-serif;font-size:clamp(11px,.9vw,14px);line-height:1.6;font-weight:400;color:rgba(255,255,255,.6);margin:0;max-width:100%}
+.bot-sub{font-family:"Manrope",sans-serif;font-size:clamp(10px,1.6vh,14px);line-height:1.55;font-weight:400;color:rgba(255,255,255,.6);margin:0;max-width:100%}
 .cta-circle{position:absolute;right:calc(-1*(clamp(64px,6vw,96px)/2));bottom:clamp(16px,2vw,32px);width:clamp(64px,6vw,96px);height:clamp(64px,6vw,96px);border-radius:50%;background:#E85D75;color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .25s,background .2s;z-index:55}
 .cta-circle:hover{transform:scale(1.08);background:#f07090}
 .cta-circle svg{width:clamp(24px,2.4vw,36px);height:auto;stroke:#fff;stroke-width:1.75;fill:none}
 
 /* FEATURE CARDS */
 .feat-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:max-content;max-width:95%;display:grid;grid-template-columns:repeat(2,260px);gap:16px;z-index:46;pointer-events:none;align-items:stretch}
-.feat-card{background:rgba(255,255,255,.14);backdrop-filter:blur(80px);-webkit-backdrop-filter:blur(80px);border:1px solid rgba(255,255,255,.12);padding:24px;width:260px;height:400px;box-shadow:0 30px 60px rgba(0,0,0,.3);display:flex;flex-direction:column;justify-content:flex-start;will-change:transform,opacity,filter}
+.feat-card{background:rgba(255,255,255,.14);backdrop-filter:blur(80px);-webkit-backdrop-filter:blur(80px);border:1px solid rgba(255,255,255,.12);padding:clamp(16px,2.4vh,24px);width:260px;height:clamp(180px,32vh,340px);box-shadow:0 30px 60px rgba(0,0,0,.3);display:flex;flex-direction:column;justify-content:flex-start;overflow:hidden;will-change:transform,opacity,filter}
 .feat-card:hover{border-color:rgba(255,255,255,.4)}
-.feat-icon{margin-bottom:28px;color:#E85D75;display:flex;align-items:center;justify-content:center}
-.feat-icon svg{width:clamp(32px,3vw,44px);height:auto;opacity:.9}
-.feat-title{font-family:"Instrument Serif",serif;font-size:22px;font-weight:400;line-height:1.15;color:#fff;margin:auto 0 8px 0;letter-spacing:-.01em}
-.feat-desc{font-family:"Manrope",sans-serif;font-size:clamp(11px,.85vw,13px);line-height:1.55;font-weight:400;color:rgba(255,255,255,.6);margin:0}
+.feat-icon{margin-bottom:clamp(10px,2vh,28px);color:#E85D75;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.feat-icon svg{width:clamp(24px,3vh,44px);height:auto}
+.feat-title{font-family:"Instrument Serif",serif;font-size:clamp(16px,2.4vh,22px);font-weight:400;line-height:1.15;color:#fff;margin:auto 0 clamp(4px,1vh,8px) 0;letter-spacing:-.01em}
+.feat-desc{font-family:"Manrope",sans-serif;font-size:clamp(10px,1.4vh,13px);line-height:1.45;font-weight:400;color:rgba(255,255,255,.6);margin:0;overflow:hidden;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical}
 @media(max-width:768px){
 .feat-wrap{grid-template-columns:1fr;width:calc(100% - 32px);left:16px;transform:translate(0,-50%);gap:12px;max-height:80vh;overflow-y:auto}
 .feat-card{width:100%;height:auto;min-height:200px;padding:20px}
@@ -214,8 +215,10 @@ body.videos-failed .fixed-viewport{background:radial-gradient(130% 130% at 26% 1
 
 <!-- Botanical card -->
 <div class="bot-card" id="elCard">
+<div class="bot-text">
 <h2 class="bot-title" data-t="card_t"><span class="it">Мехримиз</span> сизга аёллар ва уларнинг оилаларини ижтимоий хукукий <span class="it">куллаб-кувватлаш</span> маркази</h2>
 <p class="bot-sub" data-t="card_s">Кийин ахволга тушиб колган, ижтимоий химояга мухтож фукароларга зарур хизматларни курсатилишини ташкил этамиз, мурожаат этганларга керакли мутахассислар хизматини курсатилишида кумаклашамиз.</p>
+</div>
 <button class="cta-circle" id="ctaBtn" aria-label="Scroll">
 <svg viewBox="0 0 40 24"><path stroke-linecap="round" stroke-linejoin="round" d="M29.5 4.5L37 12m0 0l-7.5 7.5M37 12H3"/></svg>
 </button>
